@@ -10,7 +10,7 @@ import time
 # Capturing Webcam Feed
 cap = cv2.VideoCapture(0)
 
-time.sleep(3)
+time.sleep(4)
 
 count = 0
 
@@ -54,13 +54,16 @@ while(cap.isOpened()):
     mask1 = cv2.morphologyEx(mask1, cv2.MORPH_OPEN, np.ones((3, 3), np.uint8), iterations=2)
     mask1 = cv2.morphologyEx(mask1, cv2.MORPH_DILATE, np.ones((3, 3), np.uint8), iterations=1)
 
-    mask2 = cv2.bitwise_not(mask1)
-
-    res1 = cv2.bitwise_and(background, background, mask = mask1)
-    res2 = cv2.bitwise_and(img, img, mask = mask2)
+    mask3 = cv2.bitwise_not(mask1)
+    res1 = cv2.bitwise_and(background, background, mask = mask3)
+    res2 = cv2.bitwise_and(img, img, mask = mask3)
     final_output = cv2.addWeighted(res1, 1, res2, 1, 0)
 
-    cv2.imshow('Eureka !!', final_output)
+#     res1 = cv2.bitwise_and(background, background, mask = mask1)
+#     res2 = cv2.bitwise_and(img, img, mask = mask2)
+#     final_output = cv2.addWeighted(res1, 1, res2, 1, 0)
+
+    cv2.imshow('Hurrahh...!!', final_output)
     k = cv2.waitKey(10)
     if k == 27:
         break
